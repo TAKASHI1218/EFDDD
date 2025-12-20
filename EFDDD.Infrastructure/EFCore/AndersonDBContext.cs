@@ -1,4 +1,5 @@
 ﻿using EFDDD.Domain.Entities;
+using EFDDD.Domain.ValueObjects;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -23,6 +24,7 @@ namespace EFDDD.Infrastructure.EFCore
         {
             modelBuilder.Entity<ProductEntity>().ToTable("Product");
             modelBuilder.Entity<ProductEntity>().HasKey(p => p.ProductId);
+            modelBuilder.Entity<ProductEntity>().Property(p => p.Price).HasConversion(p => p.Value , p => new Price(p) );
         }
 
     }

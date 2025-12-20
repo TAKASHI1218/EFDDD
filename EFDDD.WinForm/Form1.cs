@@ -1,9 +1,15 @@
+using EFDDD.Domain.Entities;
+using EFDDD.Domain.ValueObjects;
 using EFDDD.Infrastructure.EFCore;
+using System.ComponentModel;
 
 namespace EFDDD.WinForm
 {
     public partial class Form1 : Form
     {
+        private BindingList<Form1Product> _products = new();
+
+
         public Form1()
         {
             InitializeComponent();
@@ -14,9 +20,32 @@ namespace EFDDD.WinForm
         {
             using (var context = new AndersonDBContext())
             {
-                dataGridView1.DataSource = context.Products.ToList();
+                foreach (var product in context.Products)
+                {
+                    _products.Add(new Form1Product(product));
+                }
+
+                dataGridView1.DataSource = _products;
             }
 
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(ProductIdTextBox.Text);
+            int price = Convert.ToInt32(PriceTextBox.Text);
+            var product = new ProductEntity();
+            product.ProductId = id;
+            product.ProductName = ProductNameTextBox.Text;
+            product.Price = new Price(price);
+
+            using(var context = new AndersonDBContext())
+            {
+                context.Products.Add(product);
+                context.SaveChanges();
+            }
+
+            this.Text = "save!";
         }
     }
 }

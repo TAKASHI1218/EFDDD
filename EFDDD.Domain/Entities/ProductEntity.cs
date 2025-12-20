@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EFDDD.Domain.ValueObjects;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,6 +9,6 @@ namespace EFDDD.Domain.Entities
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }
-        public int Price { get; set; }
+        public Price Price { get; set; }
     }
 }
