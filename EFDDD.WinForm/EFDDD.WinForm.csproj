@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EFDDD.Domain\EFDDD.Domain.csproj" />
+    <ProjectReference Include="..\EFDDD.Infrastructure\EFDDD.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
