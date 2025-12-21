@@ -34,10 +34,7 @@ namespace EFDDD.WinForm
         {
             int id = Convert.ToInt32(ProductIdTextBox.Text);
             int price = Convert.ToInt32(PriceTextBox.Text);
-            var product = new ProductEntity();
-            product.ProductId = id;
-            product.ProductName = ProductNameTextBox.Text;
-            product.Price = new Price(price);
+            var product = new ProductEntity(id, ProductNameTextBox.Text, price);
 
             using(var context = new AndersonDBContext())
             {

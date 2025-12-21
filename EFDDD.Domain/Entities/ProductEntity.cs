@@ -7,8 +7,20 @@ namespace EFDDD.Domain.Entities
 {
     public sealed class ProductEntity
     {
-        public int ProductId { get; set; }
-        public string ProductName { get; set; }
-        public Price Price { get; set; }
+        private ProductEntity()
+        {
+            // ここに処理を書くのはOK
+        }
+
+        public ProductEntity(int productId, string productName, int price)
+        {
+            ProductId = productId;
+            ProductName = productName;
+            Price = new Price(price);
+        }
+
+        public int ProductId { get; }
+        public string ProductName { get; private set; }
+        public Price Price { get; }
     }
 }
