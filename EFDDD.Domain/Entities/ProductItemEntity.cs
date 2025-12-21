@@ -19,7 +19,7 @@ namespace EFDDD.Domain.Entities
             ProductItemName = productItemName;
             Amount = amount;
             Currency = currency;
-        } 
+        }
 
         public ProductId ProductId { get; }
         public int ProductItemNo { get; private set; }
@@ -27,5 +27,23 @@ namespace EFDDD.Domain.Entities
         public decimal Amount { get; private set; }
         public string Currency { get; private set; }
         public ProductEntity Product { get; private set; }
+        public string GlobalPrice
+        {
+            get
+            {
+                if (Currency == "JPY")
+                {
+                    return decimal.Round(Amount) + "円";
+                }
+                else if (Currency == "USD")
+                {
+                    return "$" + Amount;
+                }
+                else
+                {
+                    return "???" + Amount;
+                }
+            }
+        }
     }
 }
