@@ -15,8 +15,10 @@ namespace EFDDD.WinForm
             _entity = entity;
         }
 
-        public string ProductId => _entity.ProductId.ToString();
+        public string ProductId => _entity.ProductId.DisplayValue;
         public string ProductName => _entity.ProductName;
         public string Price => _entity.Price.DisplayValueUnit;
+
+        public ICollection<ProductItemEntity> ProductItems => _entity.ProductItems;
     }
 }

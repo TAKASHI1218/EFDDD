@@ -1,6 +1,7 @@
 using EFDDD.Domain.Entities;
 using EFDDD.Domain.ValueObjects;
 using EFDDD.Infrastructure.EFCore;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 
 namespace EFDDD.WinForm
@@ -20,12 +21,13 @@ namespace EFDDD.WinForm
         {
             using (var context = new AndersonDBContext())
             {
-                foreach (var product in context.Products)
+                foreach (var product in context.Products
+                    .Include(x => x.ProductItems))
                 {
                     _products.Add(new Form1Product(product));
                 }
 
-                dataGridView1.DataSource = _products;
+                dg1.DataSource = _products;
             }
 
         }
@@ -36,13 +38,24 @@ namespace EFDDD.WinForm
             int price = Convert.ToInt32(PriceTextBox.Text);
             var product = new ProductEntity(id, ProductNameTextBox.Text, price);
 
-            using(var context = new AndersonDBContext())
+            using (var context = new AndersonDBContext())
             {
                 context.Products.Add(product);
                 context.SaveChanges();
             }
 
             this.Text = "save!";
+        }
+
+        private void dg1_SelectionChanged(object sender, EventArgs e)
+        {
+            var dto = dg1.CurrentRow.DataBoundItem as Form1Product;
+            if (dto == null)
+            {
+                return;
+            }
+
+            dg2.DataSource = dto.ProductItems;
         }
     }
 }

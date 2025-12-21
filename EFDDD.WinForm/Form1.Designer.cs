@@ -29,22 +29,25 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            dataGridView1 = new DataGridView();
+            dg1 = new DataGridView();
             contextMenuStrip1 = new ContextMenuStrip(components);
             ProductIdTextBox = new TextBox();
             ProductNameTextBox = new TextBox();
             PriceTextBox = new TextBox();
             SaveButton = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            dg2 = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dg1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dg2).BeginInit();
             SuspendLayout();
             // 
-            // dataGridView1
+            // dg1
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(49, 34);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(585, 298);
-            dataGridView1.TabIndex = 0;
+            dg1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dg1.Location = new Point(49, 34);
+            dg1.Name = "dg1";
+            dg1.Size = new Size(334, 298);
+            dg1.TabIndex = 0;
+            dg1.SelectionChanged += dg1_SelectionChanged;
             // 
             // contextMenuStrip1
             // 
@@ -82,31 +85,42 @@
             SaveButton.UseVisualStyleBackColor = true;
             SaveButton.Click += SaveButton_Click;
             // 
+            // dg2
+            // 
+            dg2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dg2.Location = new Point(407, 34);
+            dg2.Name = "dg2";
+            dg2.Size = new Size(334, 298);
+            dg2.TabIndex = 6;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 480);
+            ClientSize = new Size(1150, 480);
+            Controls.Add(dg2);
             Controls.Add(SaveButton);
             Controls.Add(PriceTextBox);
             Controls.Add(ProductNameTextBox);
             Controls.Add(ProductIdTextBox);
-            Controls.Add(dataGridView1);
+            Controls.Add(dg1);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dg1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dg2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private DataGridView dataGridView1;
+        private DataGridView dg1;
         private ContextMenuStrip contextMenuStrip1;
         private TextBox ProductIdTextBox;
         private TextBox ProductNameTextBox;
         private TextBox PriceTextBox;
         private Button SaveButton;
+        private DataGridView dg2;
     }
 }

@@ -14,13 +14,14 @@ namespace EFDDD.Domain.Entities
 
         public ProductEntity(int productId, string productName, int price)
         {
-            ProductId = productId;
+            ProductId = new ProductId(productId);
             ProductName = productName;
             Price = new Price(price);
         }
 
-        public int ProductId { get; }
+        public ProductId ProductId { get; }
         public string ProductName { get; private set; }
         public Price Price { get; }
+        public ICollection<ProductItemEntity> ProductItems { get; } = new List<ProductItemEntity>();
     }
 }
