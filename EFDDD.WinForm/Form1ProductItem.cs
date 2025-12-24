@@ -20,6 +20,6 @@ namespace EFDDD.WinForm
         public string ProductItemName => _entity.ProductItemName;
         //public string Amount => _entity.Amount.ToString();
         //public string Currency => _entity.Currency;
-        public string GlobalPrice => _entity.GlobalPrice;
+        public string GlobalPrice => _entity.GlobalPrice.DisplayValue;
     }
 }

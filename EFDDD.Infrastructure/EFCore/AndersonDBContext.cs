@@ -36,6 +36,13 @@ namespace EFDDD.Infrastructure.EFCore
                 .HasOne(pi => pi.Product)
                 .WithMany(p => p.ProductItems)
                 .HasForeignKey(pi => pi.ProductId);
+
+            modelBuilder.Entity<ProductItemEntity>()
+                .OwnsOne(p => p.GlobalPrice, g =>
+                {
+                    g.Property(p => p.Amount).HasColumnName("Amount");
+                    g.Property(p => p.Currency).HasColumnName("Currency");
+                });
             
         }
 

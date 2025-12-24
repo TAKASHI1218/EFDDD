@@ -7,43 +7,27 @@ namespace EFDDD.Domain.Entities
 {
     public sealed class ProductItemEntity
     {
-        private ProductItemEntity()
-        {
-            // ここに処理を書くのはOK
-        }
+        private ProductItemEntity() { }
 
         public ProductItemEntity(int productId, int productItemNo, string productItemName, decimal amount, string currency)
         {
             ProductId = new ProductId(productId);
             ProductItemNo = productItemNo;
             ProductItemName = productItemName;
-            Amount = amount;
-            Currency = currency;
+            GlobalPrice = new GlobalPrice(amount, currency);
         }
 
         public ProductId ProductId { get; }
         public int ProductItemNo { get; private set; }
         public string ProductItemName { get; private set; }
-        public decimal Amount { get; private set; }
-        public string Currency { get; private set; }
-        public ProductEntity Product { get; private set; }
-        public string GlobalPrice
-        {
-            get
-            {
-                if (Currency == "JPY")
-                {
-                    return decimal.Round(Amount) + "円";
-                }
-                else if (Currency == "USD")
-                {
-                    return "$" + Amount;
-                }
-                else
-                {
-                    return "???" + Amount;
-                }
-            }
-        }
+        //public decimal Amount { get; private set; }
+        //public string Currency { get; private set; }
+
+        public GlobalPrice GlobalPrice { get; }
+
+        public ProductEntity Product { get;}
     }
 }
+
+
+
