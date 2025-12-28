@@ -36,8 +36,10 @@
             PriceTextBox = new TextBox();
             SaveButton = new Button();
             dg2 = new DataGridView();
+            LogDataGrid = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dg1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dg2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)LogDataGrid).BeginInit();
             SuspendLayout();
             // 
             // dg1
@@ -47,7 +49,6 @@
             dg1.Name = "dg1";
             dg1.Size = new Size(334, 298);
             dg1.TabIndex = 0;
-            dg1.SelectionChanged += dg1_SelectionChanged;
             // 
             // contextMenuStrip1
             // 
@@ -83,7 +84,6 @@
             SaveButton.TabIndex = 5;
             SaveButton.Text = "save";
             SaveButton.UseVisualStyleBackColor = true;
-            SaveButton.Click += SaveButton_Click;
             // 
             // dg2
             // 
@@ -93,22 +93,31 @@
             dg2.Size = new Size(334, 298);
             dg2.TabIndex = 6;
             // 
-            // Form1
+            // LogDataGrid
+            // 
+            LogDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            LogDataGrid.Location = new Point(49, 378);
+            LogDataGrid.Name = "LogDataGrid";
+            LogDataGrid.Size = new Size(687, 90);
+            LogDataGrid.TabIndex = 7;
+            // 
+            // Title
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1150, 480);
+            Controls.Add(LogDataGrid);
             Controls.Add(dg2);
             Controls.Add(SaveButton);
             Controls.Add(PriceTextBox);
             Controls.Add(ProductNameTextBox);
             Controls.Add(ProductIdTextBox);
             Controls.Add(dg1);
-            Name = "Form1";
+            Name = "Title";
             Text = "Form1";
-            Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)dg1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dg2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)LogDataGrid).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -122,5 +131,6 @@
         private TextBox PriceTextBox;
         private Button SaveButton;
         private DataGridView dg2;
+        private DataGridView LogDataGrid;
     }
 }
