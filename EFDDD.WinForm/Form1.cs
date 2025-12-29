@@ -4,7 +4,9 @@ using EFDDD.Domain.ValueObjects;
 using EFDDD.Infrastructure;
 using EFDDD.Infrastructure.EFCore;
 using EFDDD.WinForm.VeiwModels;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.ComponentModel;
 
 namespace EFDDD.WinForm
@@ -17,7 +19,16 @@ namespace EFDDD.WinForm
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
 
-            var context = new AndersonDBContext();
+            //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+            var builder = new SqlConnectionStringBuilder();
+            builder.DataSource = @"(localdb)\MSSQLLocalDB";
+            builder.InitialCatalog = "AndersonD";
+            builder.IntegratedSecurity = true;
+            var o = new DbContextOptionsBuilder<AndersonDBContext>();
+            o.UseSqlServer(builder.ConnectionString);
+
+            var context = new AndersonDBContext(o.Options);
             var unitOfWork = new UnitOfWork(context);
 
             _vm = new Form1ViewModel(unitOfWork);

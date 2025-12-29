@@ -2,4 +2,5 @@
   <Project Path="EFDDD.Domain/EFDDD.Domain.csproj" />
   <Project Path="EFDDD.Infrastructure/EFDDD.Infrastructure.csproj" />
   <Project Path="EFDDD.WinForm/EFDDD.WinForm.csproj" />
+  <Project Path="EFDDDTests.Test/EFDDDTests.Test.csproj" Id="fab65bb0-ce78-4022-bd77-dd588c80f161" />
 </Solution>

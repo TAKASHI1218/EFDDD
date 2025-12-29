@@ -13,14 +13,8 @@ namespace EFDDD.Infrastructure.EFCore
         public DbSet<ProductEntity> Products { get; set; }
         public DbSet<ProductItemEntity> ProductItems { get; set; }
         public DbSet<LogEntity> Logs { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var builder = new SqlConnectionStringBuilder();
-            builder.DataSource = @"(localdb)\MSSQLLocalDB";
-            builder.InitialCatalog = "AndersonD";
-            builder.IntegratedSecurity = true;
-            optionsBuilder.UseSqlServer(builder.ConnectionString);
-        }
+
+        public AndersonDBContext(DbContextOptions<AndersonDBContext> options):base(options){}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
