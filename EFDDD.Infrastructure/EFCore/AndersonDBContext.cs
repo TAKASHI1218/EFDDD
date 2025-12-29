@@ -2,6 +2,7 @@
 using EFDDD.Domain.ValueObjects;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -39,12 +40,32 @@ namespace EFDDD.Infrastructure.EFCore
                 {
                     g.Property(p => p.Amount).HasColumnName("Amount");
                     g.Property(p => p.Currency).HasColumnName("Currency");
+                    g.Property(p => p.Amount).HasPrecision(18, 2);
                 });
 
             // LogEntity
             modelBuilder.Entity<LogEntity>().ToTable("Logs");
             modelBuilder.Entity<LogEntity>().HasKey(p => new { p.LogId });
+            modelBuilder.Entity<LogEntity>().Property(p => p.LogId).HasConversion(p => p.Value, p => new LogId(p));
+            modelBuilder.Entity<LogEntity>().Property(p => p.LogId).ValueGeneratedOnAdd();
+
+            // マイグレーションでIdentityにしない場合
+            //modelBuilder.Entity<LogEntity>().Property(p => p.LogId).ValueGeneratedNever();
         }
 
+    }
+
+    public class AndersonDbContextFactory : IDesignTimeDbContextFactory<AndersonDBContext>
+    {
+        public AndersonDBContext CreateDbContext(string[] args)
+        {
+            var builder = new SqlConnectionStringBuilder();
+            builder.DataSource = @"(localdb)\MSSQLLocalDB";
+            builder.InitialCatalog = "AndersonD2";
+            builder.IntegratedSecurity = true;
+            var o = new DbContextOptionsBuilder<AndersonDBContext>();
+            o.UseSqlServer(builder.ConnectionString);
+            return new AndersonDBContext(o.Options);
+        }
     }
 }
