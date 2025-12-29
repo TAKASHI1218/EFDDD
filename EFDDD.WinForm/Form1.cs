@@ -1,4 +1,5 @@
 using EFDDD.Domain.Entities;
+using EFDDD.Domain.Repositories;
 using EFDDD.Domain.ValueObjects;
 using EFDDD.Infrastructure;
 using EFDDD.Infrastructure.EFCore;
@@ -11,14 +12,15 @@ namespace EFDDD.WinForm
     public partial class Form1 : Form
     {
         private Form1ViewModel _vm;
-
         public Form1()
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
 
             var context = new AndersonDBContext();
-            _vm = new Form1ViewModel(context,Factories.CreateProduct(context), Factories.CreateLog(context));
+            var unitOfWork = new UnitOfWork(context);
+
+            _vm = new Form1ViewModel(unitOfWork);
 
             ProductIdTextBox.DataBindings.Add("Text", _vm, nameof(_vm.ProductIdTextBoxText));
             ProductNameTextBox.DataBindings.Add("Text", _vm, nameof(_vm.ProductNameTextBoxText));

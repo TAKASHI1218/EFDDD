@@ -12,22 +12,18 @@ namespace EFDDD.WinForm.VeiwModels
 {
     public class Form1ViewModel : ViewModelBase
     {
-        private IProductRepository _productRepository;
-        private ILogRepository _logRepository;
-        private AndersonDBContext _context;
+        private IUnitOfWork _unitOfWork;
 
-        public Form1ViewModel(AndersonDBContext context, IProductRepository productRepository, ILogRepository logRepository)
+        public Form1ViewModel(IUnitOfWork unitOfWork)
         {
-            _context = context;
-            _productRepository = productRepository;
-            _logRepository = logRepository;
+            _unitOfWork = unitOfWork;
 
-            foreach (var product in _productRepository.GetAllWithItems())
+            foreach (var product in _unitOfWork.ProductRepository.GetAllWithItems())
             {
                 Products.Add(new Form1Product(product));
             }
 
-            foreach (var log in _logRepository.GetAll())
+            foreach (var log in _unitOfWork.LogRepository.GetAll())
             {
                 Logs.Add(log);
             }
@@ -73,10 +69,10 @@ namespace EFDDD.WinForm.VeiwModels
             int price = Convert.ToInt32(PriceTextBoxText);
             var product = new ProductEntity(id, ProductNameTextBoxText, price);
 
-            _productRepository.Add(product);
-            _logRepository.Add(new LogEntity(DateTime.Now, product.ProductName + "!!insert"));
+            _unitOfWork.ProductRepository.Add(product);
+            _unitOfWork.LogRepository.Add(new LogEntity(DateTime.Now, product.ProductName + "!!insert"));
 
-            _context.SaveChanges();
+            _unitOfWork.ExeSave();
 
             Title = "save!!";
         }
