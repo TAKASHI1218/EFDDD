@@ -13,25 +13,11 @@ namespace EFDDD.WinForm
 {
     public partial class Form1 : Form
     {
-        private Form1ViewModel _vm;
+        private Form1ViewModel _vm = DI.Resolve<Form1ViewModel>();
         public Form1()
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
-
-            //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-
-            var builder = new SqlConnectionStringBuilder();
-            builder.DataSource = @"(localdb)\MSSQLLocalDB";
-            builder.InitialCatalog = "AndersonD";
-            builder.IntegratedSecurity = true;
-            var o = new DbContextOptionsBuilder<AndersonDBContext>();
-            o.UseSqlServer(builder.ConnectionString);
-
-            var context = new AndersonDBContext(o.Options);
-            var unitOfWork = new UnitOfWork(context);
-
-            _vm = new Form1ViewModel(unitOfWork);
 
             ProductIdTextBox.DataBindings.Add("Text", _vm, nameof(_vm.ProductIdTextBoxText));
             ProductNameTextBox.DataBindings.Add("Text", _vm, nameof(_vm.ProductNameTextBoxText));
